@@ -69,13 +69,13 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="getProduct", method=RequestMethod.GET)
-	public String getProduct( Product product , Model model , HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String getProduct( Product product , Model model ) throws Exception {
 		
 		System.out.println("/product/getProduct : GET");
 		
 		Product  getProduct = productService.getProduct(product.getProdNo());
 		model.addAttribute("product", getProduct);
-		System.out.println("상품커트롤2"+product);
+		System.out.println("상품커트롤2"+getProduct);
 	
 
 		return "forward:/product/getProduct.jsp";
@@ -92,11 +92,12 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="updateProductView")
-	public String updateProductView( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
+	public String updateProductView( Product product , Model model ) throws Exception{
 
-		System.out.println("/product/updateProductView");
-		Product product = productService.getProduct(prodNo);
-		model.addAttribute("product", product);
+		System.out.println("/product/updateProductView : GET ");
+		Product  getProduct = productService.getProduct(product.getProdNo());
+		System.out.println("상품업데이트뷰"+getProduct);
+		model.addAttribute("product", getProduct);
 		
 		return "forward:/product/updateProductView.jsp";
 	}
@@ -109,7 +110,7 @@ public class ProductController {
 		
 		int prodNo=product.getProdNo();
 		
-		return "redirect:/getProduct.do?prodNo="+prodNo+"&menu=manage";
+		return "forward:/getProduct.do?prodNo="+prodNo;
 		
 	}
 	

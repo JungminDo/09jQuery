@@ -50,7 +50,8 @@ $(function() {
 	 	$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
 				//Debug..
 				//alert($(this).children("#pdNo").val());
-			self.location ="/product/getProduct?prodNo="+$(this).children("#pdNo").val();
+			/*  self.location="/product/getProduct?prodNo="+$(this).text().trim()+"&menu="+$("input[type='hidden'][name='menu']").val(); */
+				self.location ="/product/getProduct?prodNo="+$(this).children("#pdNo").val()+"&menu=<c:out value="${param.menu}" />";
 		}); 
 		
 		//==> UI 수정 추가부분  :  userId LINK Event End User 에게 보일수 있도록 
